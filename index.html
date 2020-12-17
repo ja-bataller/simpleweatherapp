@@ -10,6 +10,7 @@
       <link rel="stylesheet" href="style.css">
       <link rel="stylesheet" href="icons.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.css" integrity="sha512-pH06JFjxM84j7iRF99/Cw7d9R9m2mVmEVr8oI0kK8gVkr461DI+8OYpQctHUrbmdOH7oaRyDRkkCVlQIQCFEiQ==" crossorigin="anonymous" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag==" crossorigin="anonymous" />
    </head>
    <body>
      <div>
@@ -41,9 +42,9 @@
       <form id="getAPI">
          <div class="container">
             <div class="input-group justify-content-center inputText">
-               <input type="text" id="userInput" name="userInput" autocomplete="off">
+               <input type="text" id="userInput" name="userInput" autocomplete="off" placeholder="Enter Country or City">
                <div class="input-group-append">
-                  <input class="btn btn-dark inputText" type="submit" name="Search" data-toggle="modal" data-target="#weatherModal"></input>
+                  <input class="btn btn-dark inputText" type="submit" name="Search"></input>
                </div>
             </div>
          </div>
@@ -55,23 +56,16 @@
             <div class="modal-content">
                <div class="modal-header ">
                   <h3 class="modal-title" id="weatherHeader"> </h3>
-                  <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
-                     </button> -->
+                     </button>
                </div>
                <div class="modal-body">
-                  <div class="container modalBodyColor">
-                     <div class="form-group" id="imgWeather"></div>
-                     <div class="weatherDetailsStyle" id="description"></div>
-                     <div class="form-group weatherDetailsStyle pt-3" id="celcius"></div>
-                     <div class="form-group weatherDetailsFont" id="humidity"></div>
-                     <div class="form-group weatherDetailsFont" id="pressure"></div>
-                     <div class="form-group weatherDetailsFont" id="wind"></div>
-                  </div>
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" data-dismiss="modal">Search again</button>
-                  </div>
+                  <div id="weatherResult"></div>
                </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
          </div>
       </div>
@@ -85,8 +79,8 @@
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
               </div>
               <div class="modal-body">
-                A simple and straight forward Online Weather Application that lets you search a weather forecast by city or country, 
-                this online application was built using javascript together with openwheathermap.
+                A simple and straight-forward Online Weather Application that let you search a weather forecast by city or country 
+                this online application was built using JavaScript together with OpenWeatherMap.
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -139,6 +133,7 @@
       <script src="https://res.cloudinary.com/rodetyo/raw/upload/v1455176552/bodymovin_xc8lfj.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.js" integrity="sha512-fOWk6n+fmfFNHxlw7GapMIXgsNkSR2+GaKj40YUCErg2tThtROhqD6pxfLOqbo6kA2De2qPXEiv+7HltNDrDNA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA==" crossorigin="anonymous"></script>
       <script>
          var animData = {
          wrapper: document.getElementById('circle'),
@@ -150,11 +145,6 @@
          };
          var anim = bodymovin.loadAnimation(animData);
       </script>
-      <!-- <script>
-         $('.search-button').click(function(){
-         $(this).parent().toggleClass('open');
-         });
-         </script> -->
       <script>
          new TypeIt(".title", {
          strings: "Search weather forecast around the world.",
@@ -170,46 +160,6 @@
           $('#modal').iziModal('open');
           });
       </script>
-      <script>
-         document.querySelector('#getAPI').addEventListener('submit', getAPI);
-         
-         const apiKey = 'cefac420b87bab032731b9ca83b0f530';
-         
-         const weatherHeader = document.querySelector('#weatherHeader')
-         
-         function getAPI(e){
-           e.preventDefault();
-           const userInput = document.querySelector('#userInput').value;
-           const imgWeather = document.querySelector('#imgWeather');
-           const celcius = document.querySelector('#celcius');
-           const description = document.querySelector('#description');
-           const humidity = document.querySelector('#humidity');
-           const pressure = document.querySelector('#pressure');
-           const wind = document.querySelector('#wind');
-         
-           fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userInput}&units=metric&appid=${apiKey}`)
-           .then((res) => res.json())
-           .then((data) => {
-             data.weather.forEach(function(weather){
-              weatherHeader.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${data.name}, ${data.sys.country}`;
-              imgWeather.innerHTML = `<img src="http://openweathermap.org/img/wn/${weather.icon}@4x.png">`;
-              celcius.innerHTML = `${data.main.temp} <span>&#8451;</span>`;
-              description.innerHTML = `${weather.description}`;
-              humidity.innerHTML = `HUMIDITY: ${data.main.humidity}%`;
-              pressure.innerHTML = `PRESSURE: ${data.main.pressure} hPa`;
-              wind.innerHTML = `WIND: ${data.wind.speed} m/s`
-
-               document.querySelector('#userInput').value = "";
-               console.log(data.name);
-             })
-             
-           })
-           
-         }
-         
-         
-               
-         
-      </script>
+      <script src="script.js"></script>
    </body>
 </html>
