@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Weather App</title>
+      <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="icons.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.css" integrity="sha512-pH06JFjxM84j7iRF99/Cw7d9R9m2mVmEVr8oI0kK8gVkr461DI+8OYpQctHUrbmdOH7oaRyDRkkCVlQIQCFEiQ==" crossorigin="anonymous" />
+   </head>
+   <body>
+     <div>
+      <nav class="navbar navbar-expand-lg navbar-dark navbg pt-2 pb-2">
+         <div class="container">
+            <a class="navbar-brand navMainAnchor" href="index.html">
+            <i class="fa fa-cloud"> Weather App</i>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link" type="button" data-toggle="modal" data-target="#aboutModal">About</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" type="button" data-toggle="modal" data-target="#contactAbout">Contact</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <div class="container text-center">
+      <div id='backgroundcolor'>
+         <div id ='circle'></div>
+      </div>
+      <div class="title typeitStyle pb-4"></div>
+      <form id="getAPI">
+         <div class="container">
+            <div class="input-group justify-content-center inputText">
+               <input type="text" id="userInput" name="userInput" autocomplete="off">
+               <div class="input-group-append">
+                  <input class="btn btn-dark inputText" type="submit" name="Search" data-toggle="modal" data-target="#weatherModal"></input>
+               </div>
+            </div>
+         </div>
+      </form>
+      
+      <!-- Weather Modal -->
+      <div class="modal fade" id="weatherModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+               <div class="modal-header ">
+                  <h3 class="modal-title" id="weatherHeader"> </h3>
+                  <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                     </button> -->
+               </div>
+               <div class="modal-body">
+                  <div class="container modalBodyColor">
+                     <div class="form-group" id="imgWeather"></div>
+                     <div class="weatherDetailsStyle" id="description"></div>
+                     <div class="form-group weatherDetailsStyle pt-3" id="celcius"></div>
+                     <div class="form-group weatherDetailsFont" id="humidity"></div>
+                     <div class="form-group weatherDetailsFont" id="pressure"></div>
+                     <div class="form-group weatherDetailsFont" id="wind"></div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" data-dismiss="modal">Search again</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+        <!-- About Modal -->
+        <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              </div>
+              <div class="modal-body">
+                A simple and straight forward Online Weather Application that lets you search a weather forecast by city or country, 
+                this online application was built using javascript together with openwheathermap.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+         <!-- Contact Modal -->
+         <div class="modal fade" id="contactAbout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h3 class="modal-title" id="exampleModalLabel">Contact</h3>
+                     <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button> -->
+                  </div>
+                  <div class="modal-body">
+                     <div class="mb-3">
+                        Thank you for using the app. I hope you like it!
+                     </div>
+                     <div>
+                        <i class="fa fa-envelope"></i>
+                        <a href="mailto:johnanthonybataller.ce@gmail.com" class="text-primary"> johnanthonybataller.ce@gmail.com</a>
+                     </div>
+                     <div>
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/ja-bataller" class="text-primary" target="_blank"> github.com/ja-bataller</a>
+                     </div>
+                     <div>
+                        <i class="fas fa-user-circle"></i>
+                        <a href="https://johnanthonybataller.netlify.app/" class="text-primary" target="_blank"> johnanthonybataller.netlify.app</a>
+                     </div>
+                     <div class="mt-3">
+                        Created by: John Anthony Bataller
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container pt-3">
+            <h6>Created by: <strong>John Anthony Bataller</strong></h6>
+         </div>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+      <script src="https://res.cloudinary.com/rodetyo/raw/upload/v1455176552/bodymovin_xc8lfj.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.js" integrity="sha512-fOWk6n+fmfFNHxlw7GapMIXgsNkSR2+GaKj40YUCErg2tThtROhqD6pxfLOqbo6kA2De2qPXEiv+7HltNDrDNA==" crossorigin="anonymous"></script>
+      <script>
+         var animData = {
+         wrapper: document.getElementById('circle'),
+         animType: 'svg',
+         loop: true,
+         prerender: true,
+         autoplay: true,
+         path: 'https://res.cloudinary.com/rodetyo/raw/upload/v1455714069/datacircle2_i2ewd0.json'
+         };
+         var anim = bodymovin.loadAnimation(animData);
+      </script>
+      <!-- <script>
+         $('.search-button').click(function(){
+         $(this).parent().toggleClass('open');
+         });
+         </script> -->
+      <script>
+         new TypeIt(".title", {
+         strings: "Search weather forecast around the world.",
+         speed: 50,
+         loop: false
+         }).go();
+      </script>
+      <script>
+         $(document).on('click', '.trigger', function (event) {
+          event.preventDefault();
+          // $('#modal').iziModal('setZindex', 99999);
+          // $('#modal').iziModal('open', { zindex: 99999 });
+          $('#modal').iziModal('open');
+          });
+      </script>
+      <script>
+         document.querySelector('#getAPI').addEventListener('submit', getAPI);
+         
+         const apiKey = 'cefac420b87bab032731b9ca83b0f530';
+         
+         const weatherHeader = document.querySelector('#weatherHeader')
+         
+         function getAPI(e){
+           e.preventDefault();
+           const userInput = document.querySelector('#userInput').value;
+           const imgWeather = document.querySelector('#imgWeather');
+           const celcius = document.querySelector('#celcius');
+           const description = document.querySelector('#description');
+           const humidity = document.querySelector('#humidity');
+           const pressure = document.querySelector('#pressure');
+           const wind = document.querySelector('#wind');
+         
+           fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userInput}&units=metric&appid=${apiKey}`)
+           .then((res) => res.json())
+           .then((data) => {
+             data.weather.forEach(function(weather){
+              weatherHeader.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${data.name}, ${data.sys.country}`;
+              imgWeather.innerHTML = `<img src="http://openweathermap.org/img/wn/${weather.icon}@4x.png">`;
+              celcius.innerHTML = `${data.main.temp} <span>&#8451;</span>`;
+              description.innerHTML = `${weather.description}`;
+              humidity.innerHTML = `HUMIDITY: ${data.main.humidity}%`;
+              pressure.innerHTML = `PRESSURE: ${data.main.pressure} hPa`;
+              wind.innerHTML = `WIND: ${data.wind.speed} m/s`
+
+               document.querySelector('#userInput').value = "";
+               console.log(data.name);
+             })
+             
+           })
+           
+         }
+         
+         
+               
+         
+      </script>
+   </body>
+</html>
