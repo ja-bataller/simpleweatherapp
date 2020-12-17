@@ -37,11 +37,6 @@ function getAPI(e){
                 `;
                     
                     document.querySelector('#userInput').value = "";
-                    iziToast.success({
-                        title: `${data.name} Found`,
-                        position: "topCenter",
-                        timeout:2000,
-                    });
                     // console.log(data.name);
                 });
 
