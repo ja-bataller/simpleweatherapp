@@ -21,10 +21,14 @@ function getAPI(e){
     .then((res) => res.json())
     .then((data) => {
         // load data
+        const windms = data.wind.speed;
+        const windkmh = (windms * 18) / 5;
         if(data != null)
             {
                 data.weather.forEach(function(weather){
-                    weatherHeader.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${data.name}, ${data.sys.country}`;
+                    weatherHeader.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${data.name}, ${data.sys.country}
+                    <img src="https://www.countryflags.io/${data.sys.country}/flat/48.png">
+                    `;
                     weatherResult.innerHTML = `
                     <div class="container modalBodyColor">
                         <div><img src="http://openweathermap.org/img/wn/${weather.icon}@4x.png"></div>
@@ -32,7 +36,7 @@ function getAPI(e){
                         <div class="form-group weatherDetailsStyle">${weather.description}</div>
                         <div class="form-group weatherDetailsFont" id="humidity">HUMIDITY: ${data.main.humidity}%</div>
                         <div class="form-group weatherDetailsFont" id="pressure">PRESSURE: ${data.main.pressure} hPa</div>
-                        <div class="form-group weatherDetailsFont" id="wind">WIND: ${data.wind.speed} m/s</div>
+                        <div class="form-group weatherDetailsFont" id="wind">WIND: ${windkmh.toFixed(2)} km/h</div>
                     </div>
                 `;
                     
