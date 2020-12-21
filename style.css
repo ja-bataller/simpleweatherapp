@@ -61,3 +61,7 @@ h6{
     opacity:0.8;
 }
 
+.modalHeaderStyle{
+  background-color: #373a40;
+  color: white;
+}
